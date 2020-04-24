@@ -1,2 +1,6 @@
 rootProject.name='XceedTest'
 include ':app'
+include ':domain'
+include ':data'
+include ':networkprovider'
+include ':realmprovider'
