@@ -1,0 +1,3 @@
+package dev.ricardoantolin.xceedtest.scenes.detail
+
+class CharacterDetailFragment

@@ -6,10 +6,17 @@ import dagger.Provides
 import dagger.android.ContributesAndroidInjector
 import dev.ricardoantolin.xceedtest.scenes.splash.SplashNavigator
 import dev.ricardoantolin.xceedtest.scenes.splash.SplashNavigatorImpl
+import dev.ricardoantolin.xceedtest.scenes.splash.SplashScreenActivity
 import dev.ricardoantolin.xceedtest.scenes.splash.SplashScreenFragment
 
 @Module
 abstract class SplashScreenActivityFragmentBuildersModule{
     @ContributesAndroidInjector
     abstract fun contributeSplashScreenFragmentInjector(): SplashScreenFragment
+}
+
+@Module
+interface SplashActivityModule {
+    @Binds
+    fun bindActivity(activity: SplashScreenActivity): SplashScreenActivity
 }
