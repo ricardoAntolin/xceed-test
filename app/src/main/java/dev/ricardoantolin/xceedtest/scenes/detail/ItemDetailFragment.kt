@@ -1,11 +1,12 @@
-package dev.ricardoantolin.xceedtest
+package dev.ricardoantolin.xceedtest.scenes.detail
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dev.ricardoantolin.xceedtest.dummy.DummyContent
+import dev.ricardoantolin.xceedtest.R
+import dev.ricardoantolin.xceedtest.scenes.list.dummy.DummyContent
 import kotlinx.android.synthetic.main.activity_item_detail.*
 import kotlinx.android.synthetic.main.item_detail.view.*
 

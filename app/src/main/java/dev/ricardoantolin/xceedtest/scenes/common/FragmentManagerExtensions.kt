@@ -1,4 +1,4 @@
-package dev.ricardoantolin.xceedtest.abstraction
+package dev.ricardoantolin.xceedtest.scenes.common
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

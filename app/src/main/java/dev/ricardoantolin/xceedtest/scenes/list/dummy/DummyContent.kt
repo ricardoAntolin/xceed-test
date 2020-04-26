@@ -1,4 +1,4 @@
-package dev.ricardoantolin.xceedtest.dummy
+package dev.ricardoantolin.xceedtest.scenes.list.dummy
 
 import java.util.ArrayList
 import java.util.HashMap

@@ -1,4 +1,4 @@
-package dev.ricardoantolin.xceedtest
+package dev.ricardoantolin.xceedtest.scenes.list
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,8 +9,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import dev.ricardoantolin.xceedtest.R
 
-import dev.ricardoantolin.xceedtest.dummy.DummyContent
+import dev.ricardoantolin.xceedtest.scenes.list.dummy.DummyContent
+import dev.ricardoantolin.xceedtest.scenes.detail.ItemDetailActivity
+import dev.ricardoantolin.xceedtest.scenes.detail.ItemDetailFragment
 import kotlinx.android.synthetic.main.activity_item_list.*
 import kotlinx.android.synthetic.main.item_list_content.view.*
 import kotlinx.android.synthetic.main.item_list.*
@@ -55,7 +58,12 @@ class ItemListActivity: AppCompatActivity() {
     }
 
     private fun setupRecyclerView(recyclerView: RecyclerView) {
-        recyclerView.adapter = SimpleItemRecyclerViewAdapter(this, DummyContent.ITEMS, twoPane)
+        recyclerView.adapter =
+            SimpleItemRecyclerViewAdapter(
+                this,
+                DummyContent.ITEMS,
+                twoPane
+            )
     }
 
     class SimpleItemRecyclerViewAdapter(private val parentActivity: ItemListActivity,
@@ -69,7 +77,8 @@ class ItemListActivity: AppCompatActivity() {
             onClickListener = View.OnClickListener { v ->
                 val item = v.tag as DummyContent.DummyItem
                 if (twoPane) {
-                    val fragment = ItemDetailFragment().apply {
+                    val fragment = ItemDetailFragment()
+                        .apply {
                         arguments = Bundle().apply {
                             putString(ItemDetailFragment.ARG_ITEM_ID, item.id)
                         }

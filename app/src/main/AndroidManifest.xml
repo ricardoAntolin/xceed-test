@@ -3,12 +3,14 @@
     package="dev.ricardoantolin.xceedtest">
 
     <application
-        android:allowBackup="true"
+        android:name=".App"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="false">
         <activity
             android:name=".scenes.splash.SplashScreenActivity"
             android:label="@string/app_name"
@@ -21,17 +23,17 @@
         </activity>
 
         <activity
-            android:name=".ItemListActivity"
+            android:name=".scenes.list.ItemListActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ItemDetailActivity"
+            android:name=".scenes.detail.ItemDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
+            android:parentActivityName=".scenes.list.ItemListActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.ricardoantolin.xceedtest.ItemListActivity" />
+                android:value="dev.ricardoantolin.xceedtest.scenes.list.ItemListActivity" />
         </activity>
     </application>
 
