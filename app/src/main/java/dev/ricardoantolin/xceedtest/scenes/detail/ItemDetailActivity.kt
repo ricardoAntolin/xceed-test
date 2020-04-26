@@ -1,10 +1,12 @@
-package dev.ricardoantolin.xceedtest
+package dev.ricardoantolin.xceedtest.scenes.detail
 
 import android.content.Intent
 import android.os.Bundle
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
+import dev.ricardoantolin.xceedtest.scenes.list.ItemListActivity
+import dev.ricardoantolin.xceedtest.R
 import kotlinx.android.synthetic.main.activity_item_detail.*
 
 /**
@@ -40,9 +42,11 @@ class ItemDetailActivity: AppCompatActivity() {
         if (savedInstanceState == null) {
             // Create the detail fragment and add it to the activity
             // using a fragment transaction.
-            val fragment = ItemDetailFragment().apply {
+            val fragment = ItemDetailFragment()
+                .apply {
                 arguments = Bundle().apply {
-                    putString(ItemDetailFragment.ARG_ITEM_ID,
+                    putString(
+                        ItemDetailFragment.ARG_ITEM_ID,
                             intent.getStringExtra(ItemDetailFragment.ARG_ITEM_ID))
                 }
             }

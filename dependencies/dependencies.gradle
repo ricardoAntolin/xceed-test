@@ -56,6 +56,9 @@ versions.mockwebserver = versions.ok_http
 versions.rxjava2 = "3.0.2"
 versions.rxandroid = "3.0.0"
 versions.rxkotlin = "3.0.0"
+versions.javaxInjectVersion = "1"
+versions.javaxAnnotationVersion = "1.0"
+versions.glide = "4.11.0"
 
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
@@ -88,7 +91,9 @@ google_services.plugin = "com.google.gms:google-services:$versions.google_servic
 
 def dagger = [:]
 dagger.runtime = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android-support:$versions.dagger"
 dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+dagger.processor = "com.google.dagger:dagger-android-processor:$versions.dagger"
 
 def retrofit = [:]
 retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
@@ -118,6 +123,10 @@ firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:$versions.fireba
 
 def third_party = [:]
 third_party.material = "com.google.android.material:material:$versions.material"
+third_party.javaxAnnotation = "javax.annotation:jsr250-api:$versions.javaxAnnotationVersion"
+third_party.javaxInject = "javax.inject:javax.inject:$versions.javaxInjectVersion"
+third_party.glide = "com.github.bumptech.glide:glide:$versions.glide"
+third_party.glide_processor = "com.github.bumptech.glide:compiler:$versions.glide"
 
 ext.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.realm_plugin = "io.realm:realm-gradle-plugin:$versions.realm"
@@ -139,12 +148,15 @@ def unit_test_common = [
 
 def common = [
         [configuration: "implementation", dependency: rx.rxjava2],
+        [configuration: "implementation", dependency: rx.rxkotlin],
         [configuration: "implementation", dependency: kotlin.stdlib]
 ]
 
 def realm_provider_dependencies = [
         [configuration: "kapt", dependency: "dk.ilios:realmfieldnameshelper:$versions.realm_fields_names_helper"],
         [configuration: "implementation", dependency: rx.rxandroid],
+        [configuration: "implementation", dependency: third_party.javaxAnnotation],
+        [configuration: "implementation", dependency: third_party.javaxInject],
         [configuration: "implementation", dependency: project(modules.data)]
 ]
 realm_provider_dependencies.addAll(common)
@@ -153,8 +165,9 @@ ext.realm_provider_dependencies = realm_provider_dependencies
 
 def network_provider_dependencies = [
         [configuration: "kapt", dependency: "dk.ilios:realmfieldnameshelper:$versions.realm_fields_names_helper"],
-        [configuration: "implementation", dependency: rx.rxkotlin],
         [configuration: "implementation", dependency: project(modules.data)],
+        [configuration: "implementation", dependency: third_party.javaxAnnotation],
+        [configuration: "implementation", dependency: third_party.javaxInject],
         [configuration: "testImplementation", dependency: test.mockwebserver]
 ]
 network_provider_dependencies.addAll(common)
@@ -162,7 +175,8 @@ network_provider_dependencies.addAll(unit_test_common)
 ext.network_provider_dependencies = network_provider_dependencies
 
 def data_dependencies = [
-        [configuration: "implementation", dependency: rx.rxkotlin],
+        [configuration: "implementation", dependency: third_party.javaxAnnotation],
+        [configuration: "implementation", dependency: third_party.javaxInject],
         [configuration: "implementation", dependency: project(modules.domain)]
 ]
 data_dependencies.addAll(common)
@@ -170,7 +184,8 @@ data_dependencies.addAll(unit_test_common)
 ext.data_dependencies = data_dependencies
 
 def domain_dependencies = [
-        [configuration: "implementation", dependency: rx.rxkotlin]
+        [configuration: "implementation", dependency: third_party.javaxAnnotation],
+        [configuration: "implementation", dependency: third_party.javaxInject],
 ]
 domain_dependencies.addAll(common)
 domain_dependencies.addAll(unit_test_common)
@@ -195,10 +210,14 @@ def presentation_dependencies = [
         [configuration: "implementation", dependency: androidx.activity],
         [configuration: "implementation", dependency: androidx.fragment],
         [configuration: "implementation", dependency: dagger.runtime],
+        [configuration: "implementation", dependency: dagger.android],
         [configuration: "implementation", dependency: third_party.material],
         [configuration: "kapt", dependency: dagger.compiler],
+        [configuration: "kapt", dependency: dagger.processor],
+        [configuration: "implementation", dependency: rx.rxandroid],
+        [configuration: "implementation", dependency: third_party.glide],
+        [configuration: "kapt", dependency: third_party.glide_processor],
         [configuration: "testImplementation", dependency: dagger.runtime]
-
 ]
 presentation_dependencies.addAll(common)
 presentation_dependencies.addAll(unit_test_common)
