@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FEE340</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FEE340</color>
+
+    <color name="textPrimary">#FEE340</color>
+    <color name="textSecondary">#000000</color>
+    
+    <color name="input_background">#50ffffff</color>
+    <color name="loader_background">#70FEE340</color>
+</resources>

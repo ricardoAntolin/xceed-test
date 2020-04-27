@@ -1,0 +1,145 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    def globalConfiguration = rootProject.ext
+
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
+
+    defaultConfig {
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+
+        applicationId globalConfiguration.androidApplicationId
+
+        versionCode globalConfiguration.androidVersionCode
+        versionName globalConfiguration.androidVersionName
+
+        testInstrumentationRunner globalConfiguration.testInstrumentationRunner
+        testApplicationId globalConfiguration.testApplicationId
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES.txt'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/dependencies.txt'
+        exclude 'META-INF/LGPL2.1'
+        pickFirst 'mockito-extensions/org.mockito.plugins.MockMaker'
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file("../keystore/debug.keystore")
+            storePassword "q1w2e3r4"
+            keyAlias "key0"
+            keyPassword "q1w2e3r4"
+        }
+
+        release {
+            storeFile file("../keystore/release.keystore")
+            storePassword "q1w2e3r4"
+            keyAlias "key0"
+            keyPassword "q1w2e3r4"
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+
+    flavorDimensions "version", "environment"
+
+    productFlavors {
+        alpha {
+            dimension "version"
+            versionNameSuffix " alpha " + getDate()
+
+            ext {
+                versionSuffix = "α " + getDate()
+                versionNeedsSuffixPackage = true
+            }
+        }
+
+        beta {
+            dimension "version"
+            versionNameSuffix " beta " + getDate()
+            ext {
+                versionSuffix = "β ${versionName} " + getDate()
+                versionNeedsSuffixPackage = true
+            }
+        }
+
+        store {
+            dimension "version"
+            ext {
+                versionSuffix = ''
+                versionNeedsSuffixPackage = false
+            }
+        }
+
+        staging {
+            dimension "environment"
+            buildConfigField "String", "API_URL", "\"https://swapi.dev/api/\""
+            ext {
+                packageSuffix = ".sta"
+            }
+        }
+
+        production {
+            dimension "environment"
+            buildConfigField "String", "API_URL", "\"https://swapi.dev/api/\""
+            ext {
+                packageSuffix = ".prod"
+            }
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+            splits.abi.enable = false
+            splits.density.enable = false
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
+            debuggable false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    testOptions {
+        animationsDisabled = true
+        unitTests.returnDefaultValues = true
+        unitTests.includeAndroidResources = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    presentation_dependencies.each {
+        add(it.configuration, it.dependency, it.options)
+    }
+}
+
+private def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('dd/MM/yyyy')
+    return formattedDate
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <declare-styleable name="LoaderTextView">
+        <attr name="ltv_width" format="dimension"/>
+        <attr name="ltv_height" format="dimension"/>
+        <attr name="ltv_useGradient" format="boolean"/>
+    </declare-styleable>
+
+</resources>

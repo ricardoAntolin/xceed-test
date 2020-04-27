@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Xceed Test</string>
+    <string name="title_item_detail">Character Detail</string>
+    <string name="star_wars">Star\nWars</string>
+    <string name="character_list_search_title">Search by name</string>
+    <string name="character_list_search_hint">Enter character name</string>
+    <string name="character_list_search_ime_action_label">Search</string>
+    <string name="character_list_item_born_label">Born date:</string>
+    <string name="character_detail_item_height_label">Height:</string>
+    <string name="character_detail_item_mass_label">Mass:</string>
+    <string name="character_detail_item_hair_color_label">Hair color:</string>
+    <string name="character_detail_item_skin_color_label">Skin color:</string>
+    <string name="character_detail_item_eye_color_label">Eye color:</string>
+    <string name="character_detail_item_gender_label">Gender:</string>
+</resources>
