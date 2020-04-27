@@ -5,10 +5,10 @@ import android.view.View
 import androidx.annotation.LayoutRes
 import com.bumptech.glide.Glide
 import dev.ricardoantolin.xceedtest.R
-import dev.ricardoantolin.xceedtest.scenes.common.BaseFragment
+import dev.ricardoantolin.xceedtest.scenes.common.base.BaseFragment
 import kotlinx.android.synthetic.main.splash_screen_fragment.*
 
-class SplashScreenFragment(@LayoutRes layoutIdRes: Int): BaseFragment(layoutIdRes) {
+class SplashScreenFragment: BaseFragment(R.layout.splash_screen_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let {

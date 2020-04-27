@@ -1,6 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background">
 
-</LinearLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcyCharacterList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/character_list_padding"
+        tools:listitem="@layout/character_list_item"/>
+
+    <LinearLayout
+        android:id="@+id/searchContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:elevation="@dimen/search_container_elevation"
+        android:paddingBottom="@dimen/search_container_vertical_padding"
+        android:paddingTop="@dimen/search_container_vertical_padding"
+        android:paddingStart="@dimen/search_container_horizontal_padding"
+        android:paddingEnd="@dimen/search_container_horizontal_padding"
+        android:background="@drawable/search_container_bg"
+        android:layout_alignParentBottom="true">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/lblSearchContainerTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Caption"
+            android:drawableStart="@android:drawable/arrow_down_float"
+            android:drawablePadding="@dimen/search_title_drawable_padding"
+            android:text="@string/character_list_search_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:id="@+id/txtSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/character_list_search_hint"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorPrimaryDark"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Caption"
+                android:id="@+id/txtSearchInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="?android:attr/actionModeWebSearchDrawable"
+                android:drawablePadding="@dimen/search_title_drawable_padding"
+                android:imeActionLabel="@string/character_list_search_ime_action_label"
+                android:background="@color/input_background"
+                android:lines="1"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+
+</RelativeLayout>

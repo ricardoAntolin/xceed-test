@@ -2,10 +2,10 @@ package dev.ricardoantolin.xceedtest.scenes.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.LiveDataReactiveStreams
-import dev.ricardoantolin.xceedtest.scenes.common.BaseViewModel
-import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.BackpressureStrategy
-import io.reactivex.rxjava3.core.Observable
+import dev.ricardoantolin.xceedtest.scenes.common.base.BaseViewModel
+import io.reactivex.BackpressureStrategy
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 

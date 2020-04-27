@@ -7,10 +7,15 @@
         <item name="android:fontFamily">@font/star_wars</item>
     </style>
 
-    <style name="Body2" parent="android:TextAppearance">
+    <style name="Body1" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/textPrimary</item>
         <item name="android:fontFamily">@font/star_wars</item>
+    </style>
+
+    <style name="Body2" parent="android:TextAppearance">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/textPrimary</item>
     </style>
 
     <style name="Caption" parent="android:TextAppearance">
