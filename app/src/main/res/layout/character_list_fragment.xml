@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Caption"
-            android:drawableStart="@android:drawable/arrow_down_float"
+            android:drawableStart="@drawable/ic_caret"
             android:drawablePadding="@dimen/search_title_drawable_padding"
             android:text="@string/character_list_search_title" />
 
