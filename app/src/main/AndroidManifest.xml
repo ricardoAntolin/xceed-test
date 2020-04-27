@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="dev.ricardoantolin.xceedtest">
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:name=".App"
+        android:usesCleartextTraffic="true"
         android:allowBackup="false"
+        android:fullBackupContent="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="false">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".scenes.splash.SplashScreenActivity"
             android:label="@string/app_name"
@@ -21,20 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".scenes.list.ItemListActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".scenes.detail.ItemDetailActivity"
+            android:name=".scenes.detail.CharacterDetailActivity"
             android:label="@string/title_item_detail"
-            android:parentActivityName=".scenes.list.ItemListActivity"
+            android:parentActivityName=".scenes.detail.CharacterDetailActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="dev.ricardoantolin.xceedtest.scenes.list.ItemListActivity" />
+                android:value=".scenes.list.CharacterListActivity" />
         </activity>
+        <activity
+            android:name=".scenes.list.CharacterListActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
-
 </manifest>

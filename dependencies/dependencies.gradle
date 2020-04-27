@@ -35,30 +35,33 @@ versions.kotlin = "1.3.71"
 versions.android_gradle_plugin = "3.6.3"
 
 //Unit Testing
-versions.robolectric = '4.0.2'
-versions.junit = '4.12'
-versions.kluent = '1.44'
-versions.mockito = '2.23.4'
-versions.android_test_core = '1.0.0'
+versions.robolectric = "4.0.2"
+versions.junit = "4.12"
+versions.kluent = "1.44"
+versions.mockito = "2.23.4"
+versions.android_test_core = "1.0.0"
 versions.mockito2 = "2.2.0"
 
 //Acceptance Testing
-versions.runner = '1.1.0'
-versions.espresso = '3.1.0'
-versions.uiautomator = '2.2.0'
+versions.runner = "1.1.0"
+versions.espresso = "3.1.0"
+versions.uiautomator = "2.2.0"
 
 //Third party libraries
-versions.realm = "5.8.0"
+versions.realm = "6.1.0"
 versions.realm_fields_names_helper = "1.1.1"
 versions.retrofit = "2.5.0"
 versions.ok_http = "4.5.0"
 versions.mockwebserver = versions.ok_http
-versions.rxjava2 = "3.0.2"
-versions.rxandroid = "3.0.0"
-versions.rxkotlin = "3.0.0"
+versions.rxjava2 = "2.2.19"
+versions.rxandroid = "2.1.1"
+versions.rxkotlin = "2.4.0"
+versions.rxbinding = "3.1.0"
 versions.javaxInjectVersion = "1"
 versions.javaxAnnotationVersion = "1.0"
 versions.glide = "4.11.0"
+versions.renderer = "3.5.0"
+versions.power_mock = "2.0.2"
 
 def kotlin = [:]
 kotlin.stdlib = "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin"
@@ -77,14 +80,16 @@ androidx.viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.andro
 androidx.livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle"
 androidx.runtime_extensions = "androidx.lifecycle:lifecycle-runtime-ktx:$versions.androidx.lifecycle"
 androidx.livedata_extensions = "androidx.lifecycle:lifecycle-livedata-ktx:$versions.androidx.lifecycle"
+androidx.livedata_reactivestreams = "androidx.lifecycle:lifecycle-reactivestreams-ktx:$versions.androidx.lifecycle"
 androidx.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.androidx.lifecycle"
 androidx.activity = "androidx.activity:activity-ktx:$versions.androidx.stable"
 androidx.fragment = "androidx.fragment:fragment-ktx:$versions.androidx.stable_2"
 
 def rx = [:]
-rx.rxjava2 = "io.reactivex.rxjava3:rxjava:$versions.rxjava2"
-rx.rxandroid = "io.reactivex.rxjava3:rxandroid:$versions.rxandroid"
-rx.rxkotlin = "io.reactivex.rxjava3:rxkotlin:$versions.rxkotlin"
+rx.rxjava2 = "io.reactivex.rxjava2:rxjava:$versions.rxjava2"
+rx.rxandroid = "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"
+rx.rxkotlin = "io.reactivex.rxjava2:rxkotlin:$versions.rxkotlin"
+rx.binding = "com.jakewharton.rxbinding3:rxbinding-recyclerview:$versions.rxbinding"
 
 def google_services = [:]
 google_services.plugin = "com.google.gms:google-services:$versions.google_services_plugin"
@@ -100,7 +105,6 @@ retrofit.runtime = "com.squareup.retrofit2:retrofit:$versions.retrofit"
 retrofit.gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
 retrofit.rx = "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"
 retrofit.loggin_interceptor = "com.squareup.okhttp3:logging-interceptor:$versions.ok_http"
-retrofit.mock = "com.squareup.retrofit2:retrofit-mock:$versions.retrofit"
 
 def test = [:]
 test.junit = "junit:junit:$versions.junit"
@@ -117,6 +121,12 @@ test.uiautomator = "androidx.test.uiautomator:uiautomator:$versions.uiautomator"
 test.mockito2 = "com.nhaarman.mockitokotlin2:mockito-kotlin:$versions.mockito2"
 test.mockwebserver = "com.squareup.okhttp3:mockwebserver:$versions.mockwebserver"
 
+def power_mock = [:]
+power_mock.junit = "org.powermock:powermock-module-junit4:$versions.power_mock"
+power_mock.junit_rule = "org.powermock:powermock-module-junit4-rule:$versions.power_mock"
+power_mock.mockito = "org.powermock:powermock-api-mockito2:$versions.power_mock"
+power_mock.xstream = "org.powermock:powermock-classloading-xstream:$versions.power_mock"
+
 def firebase = [:]
 firebase.analytics = "com.google.firebase:firebase-analytics:$versions.firebase_analytics"
 firebase.crashlytics = "com.crashlytics.sdk.android:crashlytics:$versions.firebase_crashlytics"
@@ -127,6 +137,8 @@ third_party.javaxAnnotation = "javax.annotation:jsr250-api:$versions.javaxAnnota
 third_party.javaxInject = "javax.inject:javax.inject:$versions.javaxInjectVersion"
 third_party.glide = "com.github.bumptech.glide:glide:$versions.glide"
 third_party.glide_processor = "com.github.bumptech.glide:compiler:$versions.glide"
+third_party.renderer = "com.github.pedrovgs:renderers:$versions.renderer"
+third_party.robolectric = "org.robolectric:robolectric:$versions.robolectric"
 
 ext.android_gradle_plugin = "com.android.tools.build:gradle:$versions.android_gradle_plugin"
 ext.realm_plugin = "io.realm:realm-gradle-plugin:$versions.realm"
@@ -157,21 +169,25 @@ def realm_provider_dependencies = [
         [configuration: "implementation", dependency: rx.rxandroid],
         [configuration: "implementation", dependency: third_party.javaxAnnotation],
         [configuration: "implementation", dependency: third_party.javaxInject],
-        [configuration: "implementation", dependency: project(modules.data)]
+        [configuration: "implementation", dependency: androidx.annotations],
+        [configuration: "implementation", dependency: project(modules.data)],
+        [configuration: "testImplementation", dependency: test.core],
+        [configuration: "testImplementation", dependency: third_party.robolectric]
 ]
 realm_provider_dependencies.addAll(common)
 realm_provider_dependencies.addAll(unit_test_common)
+power_mock.values().each { realm_provider_dependencies.add([configuration: "testImplementation", dependency: it]) }
 ext.realm_provider_dependencies = realm_provider_dependencies
 
 def network_provider_dependencies = [
-        [configuration: "kapt", dependency: "dk.ilios:realmfieldnameshelper:$versions.realm_fields_names_helper"],
         [configuration: "implementation", dependency: project(modules.data)],
         [configuration: "implementation", dependency: third_party.javaxAnnotation],
         [configuration: "implementation", dependency: third_party.javaxInject],
-        [configuration: "testImplementation", dependency: test.mockwebserver]
+        [configuration: "testImplementation", dependency: test.mockwebserver],
 ]
 network_provider_dependencies.addAll(common)
 network_provider_dependencies.addAll(unit_test_common)
+retrofit.values().each { network_provider_dependencies.add([configuration: "implementation", dependency: it]) }
 ext.network_provider_dependencies = network_provider_dependencies
 
 def data_dependencies = [
@@ -197,6 +213,7 @@ def presentation_dependencies = [
         [configuration: "implementation", dependency: project(modules.realmprovider)],
         [configuration: "implementation", dependency: project(modules.networkprovider)],
         [configuration: "implementation", dependency: rx.rxandroid],
+        [configuration: "implementation", dependency: rx.binding],
         [configuration: "implementation", dependency: androidx.appcompat],
         [configuration: "implementation", dependency: androidx.annotations],
         [configuration: "implementation", dependency: androidx.recyclerview],
@@ -206,12 +223,14 @@ def presentation_dependencies = [
         [configuration: "implementation", dependency: androidx.livedata],
         [configuration: "implementation", dependency: androidx.runtime_extensions],
         [configuration: "implementation", dependency: androidx.livedata_extensions],
+        [configuration: "implementation", dependency: androidx.livedata_reactivestreams],
         [configuration: "kapt", dependency: androidx.compiler],
         [configuration: "implementation", dependency: androidx.activity],
         [configuration: "implementation", dependency: androidx.fragment],
         [configuration: "implementation", dependency: dagger.runtime],
         [configuration: "implementation", dependency: dagger.android],
         [configuration: "implementation", dependency: third_party.material],
+        [configuration: "implementation", dependency: third_party.renderer],
         [configuration: "kapt", dependency: dagger.compiler],
         [configuration: "kapt", dependency: dagger.processor],
         [configuration: "implementation", dependency: rx.rxandroid],

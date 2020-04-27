@@ -1,26 +1,17 @@
 package dev.ricardoantolin.xceedtest.scenes.splash
 
-import androidx.appcompat.app.AppCompatActivity
 import dev.ricardoantolin.xceedtest.R
-import dev.ricardoantolin.xceedtest.scenes.common.loadFragment
-import javax.inject.Inject
+import dev.ricardoantolin.xceedtest.scenes.common.extensions.navigateToActivity
+import dev.ricardoantolin.xceedtest.scenes.common.extensions.pushFragment
+import dev.ricardoantolin.xceedtest.scenes.list.CharacterListActivity
 
-interface SplashNavigator {
-    fun loadSplashFragment(activity: AppCompatActivity)
-    fun goToListActivity(activity: AppCompatActivity)
+fun SplashScreenActivity.loadSplashFragment() {
+    pushFragment(
+        fragment = SplashScreenFragment(),
+        contentFrame = R.id.splashContainer
+    )
 }
 
-class SplashNavigatorImpl @Inject constructor(): SplashNavigator {
-    override fun loadSplashFragment(activity: AppCompatActivity) {
-        activity.supportFragmentManager
-            .loadFragment(
-                fragment = SplashScreenFragment(R.layout.splash_screen_fragment),
-                containerIdRes = R.id.splashContainer,
-                addToBackStack = false
-            )
-    }
-
-    override fun goToListActivity(activity: AppCompatActivity) {
-
-    }
+fun SplashScreenActivity.goToListActivity() {
+    navigateToActivity(CharacterListActivity::class.java)
 }

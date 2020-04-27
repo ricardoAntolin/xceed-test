@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="search_container_elevation">8dp</dimen>
+    <dimen name="search_title_drawable_padding">8dp</dimen>
+    <dimen name="search_container_horizontal_padding">32dp</dimen>
+    <dimen name="search_container_vertical_padding">16dp</dimen>
+    <dimen name="search_edit_text_padding">4dp</dimen>
+    <dimen name="character_list_padding">8dp</dimen>
+    <dimen name="character_item_margin">8dp</dimen>
+    <dimen name="character_item_padding">16dp</dimen>
+    <dimen name="character_item_label_padding">8dp</dimen>
+</resources>

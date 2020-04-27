@@ -86,6 +86,7 @@ android {
 
         staging {
             dimension "environment"
+            buildConfigField "String", "API_URL", "\"https://swapi.dev/api/\""
             ext {
                 packageSuffix = ".sta"
             }
@@ -93,6 +94,7 @@ android {
 
         production {
             dimension "environment"
+            buildConfigField "String", "API_URL", "\"https://swapi.dev/api/\""
             ext {
                 packageSuffix = ".prod"
             }
@@ -101,14 +103,12 @@ android {
 
     buildTypes {
         debug {
-            buildConfigField "boolean", "SHOULD_REPORT_TO_CRASHLYTICS", "false"
             signingConfig signingConfigs.debug
             splits.abi.enable = false
             splits.density.enable = false
         }
 
         release {
-            buildConfigField "boolean", "SHOULD_REPORT_TO_CRASHLYTICS", "true"
             signingConfig signingConfigs.release
             shrinkResources true
             minifyEnabled true
